@@ -7,7 +7,6 @@ function getPlayerDetails(ns) {
 
   hackPrograms.forEach((hackProgram) => {
     if (ns.fileExists(hackProgram, 'home')) {
-      ns.tprint(`[${localeHHMMSS()}] Detected ${hackProgram}. Nice.`)
       portHacks += 1
     }
   })
