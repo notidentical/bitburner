@@ -88,6 +88,8 @@ export async function main(ns) {
 
   settings.maxGbRam = ns.getPurchasedServerMaxRam()
   settings.maxPlayerServers = ns.getPurchasedServerLimit()
+  settings.gbRamCost = ns.getPurchasedServerCost(8)/8
+
   let hostname = ns.getHostname()
 
   if (hostname !== 'home') {

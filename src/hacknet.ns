@@ -6,6 +6,7 @@
 export async function main(ns) {
     const hn = ns.hacknet;
     var options = ["level", "ram", "core", "node"];
+    ns.tprint("Running hacknet with 10% treshold.");
     while(true) {
         var maxNodes = hn.numNodes();
         var needsNode = false;
@@ -15,7 +16,7 @@ export async function main(ns) {
         }
         for (var i = 0; i < maxNodes; i++) {
             for (var o = (needsNode ? 3 : 0); o < options.length; o++) {
-                var allowancePercentage = 0.001;
+                var allowancePercentage = 0.1;
                 var playerMoney = ns.getServerMoneyAvailable("home");
                 var costOfThing = 0;
                 switch(o) {

@@ -1,0 +1,8 @@
+while (1){
+    if (hacknet.numHashes() > 40) {
+        for (i = 0; i <= Math.floor(hacknet.numHashes()/40) ; i++) {
+             hacknet.spendHashes("Sell for Money")
+        }
+    }
+    sleep(100);
+}

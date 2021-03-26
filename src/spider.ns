@@ -77,7 +77,18 @@ export async function main(ns) {
     const connections = ns.scan(host) || ['home']
     serverMap.servers[host].connections = connections
 
-    connections.filter((hostname) => !serverMap.servers[hostname]).forEach((hostname) => scanArray.push(hostname))
+    function getHacknet(hostname){
+      if (hostname == "hacknet-node-0"){
+        scanArray.push(hostname)
+      }
+    }
+
+
+    connections.filter((hostname) => !serverMap.servers[hostname]).forEach((hostname) => scanArray.push(hostname)) 
+    connections.filter((hostname) => !serverMap.servers[hostname]).forEach((hostname) => getHacknet(hostname))
+
+
+
   }
 
   let hasAllParents = false
