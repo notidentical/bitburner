@@ -1,0 +1,52 @@
+export async function main(ns) {
+
+    var maxTimeToWait = 20; //Time im willing to wait to save money
+    
+    var production = 0;
+    var timeBuyUniTrain = 0;
+    var timeBuyGymTrain = 0;
+
+    var sellForMoneyHashCost = 0;
+    var universityHashCost   = 0;
+    var gymHashCost          = 0;
+
+    while (1) {
+        
+    sellForMoneyHashCost = ns.hacknet.hashCost("Sell for Money"); //4
+    universityHashCost   = ns.hacknet.hashCost("Improve Studying"); //Start: 50
+    gymHashCost          = ns.hacknet.hashCost("Improve Gym Training"); //Start: 50
+        
+        production = 0;
+        for (var hn = 0; hn < ns.hacknet.numNodes(); hn++) {
+            production += ns.hacknet.getNodeStats(hn).production;
+        }
+        
+        timeBuyUniTrain = universityHashCost/production;
+        timeBuyGymTrain = gymHashCost/production;
+        
+        //ns.tprint(production);
+        //if it costs less than 30 seconds to get resources
+        //AND production > 80 hashes/second, then invest
+        //else, sell hashes for money
+        
+        if (((timeBuyUniTrain <= maxTimeToWait) || (timeBuyGymTrain <= maxTimeToWait)) && production >= 80) {
+        
+            if ((timeBuyUniTrain <= maxTimeToWait) && (ns.hacknet.numHashes() >= universityHashCost)) {
+                ns.hacknet.spendHashes("Improve Studying");
+                ns.tprint ("Bought University Training for " + universityHashCost);
+            }
+            if ((timeBuyGymTrain <= maxTimeToWait) && (ns.hacknet.numHashes() >= gymHashCost)) {
+                ns.hacknet.spendHashes("Improve Gym Training");
+                ns.tprint ("Bought Gym training  for " + gymHashCost);
+            }
+        
+        } else if (ns.hacknet.numHashes() > sellForMoneyHashCost) {
+            for (var i = 0; i <= Math.floor(ns.hacknet.numHashes() / sellForMoneyHashCost); i++) {
+                ns.hacknet.spendHashes("Sell for Money")
+            }
+            //ns.tprint("Selling for cash");
+        }
+        await ns.sleep(1500);
+    }
+
+}
