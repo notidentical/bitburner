@@ -78,7 +78,7 @@ export async function main(ns) {
     serverMap.servers[host].connections = connections
 
     function getHacknet(hostname){
-      if (hostname == "hacknet-node-0"){
+      if (hostname.startsWith("hacknet-node-")){
         scanArray.push(hostname)
       }
     }
