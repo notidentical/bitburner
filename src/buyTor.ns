@@ -1,0 +1,18 @@
+// Automatically buys Tor Router and the main programs
+// Needs source-file 4. Obviously.
+
+export async function main(ns) {
+    if (ns.purchaseTor()){
+        ns.tprint("Purchased Tor Router");
+    }
+    
+    var programs = ["brutessh.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
+    
+    for (var i = 0; i < programs.length; i++) { 
+        if (ns.purchaseProgram(programs[i])){
+            ns.tprint("Purchased "+ programs[i]);
+        }
+        
+    }
+    
+}
