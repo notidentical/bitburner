@@ -5,7 +5,7 @@
 
 export async function main(ns) {
     const hn = ns.hacknet;
-    var options = ["level", "ram", "core", "node"];
+    var options = ["level", "ram", "core", "node", "cache"];
     ns.tprint("Running hacknet with 10% treshold.");
     while(true) {
         var maxNodes = hn.numNodes();
@@ -32,6 +32,9 @@ export async function main(ns) {
                     case 3:
                         costOfThing = hn.getPurchaseNodeCost();
                         break;
+                    case 4:
+                        costOfThing = hn.getCacheUpgradeCost(i, 1);
+                        break;
                 }
                 
                 var shouldPurchase = playerMoney * allowancePercentage >= costOfThing;
@@ -48,6 +51,9 @@ export async function main(ns) {
                             break;
                         case 3:
                             hn.purchaseNode()
+                            break;
+                        case 4:
+                            hn.upgradeCache(i, 1);
                             break;
                     }  
                 }
