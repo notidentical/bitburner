@@ -1,6 +1,6 @@
 export async function main(ns) {
 
-    var maxTimeToWait = 20; //Time im willing to wait to save money
+    var maxTimeToWait = 120; //Time im willing to wait to save money
     
     var production = 0;
     var timeBuyUniTrain = 0;
