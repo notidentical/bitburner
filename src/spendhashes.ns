@@ -1,6 +1,7 @@
 export async function main(ns) {
 
-    var maxTimeToWait = 120; //Time im willing to wait to save money
+    var maxTimeToWait = 120; //Time im willing to wait to save money (Default was 20)
+    var minProduction = 4;   //Min production to start investing on training (Default was 80)
     
     var production = 0;
     var timeBuyUniTrain = 0;
@@ -29,7 +30,7 @@ export async function main(ns) {
         //AND production > 80 hashes/second, then invest
         //else, sell hashes for money
         
-        if (((timeBuyUniTrain <= maxTimeToWait) || (timeBuyGymTrain <= maxTimeToWait)) && production >= 80) {
+        if (((timeBuyUniTrain <= maxTimeToWait) || (timeBuyGymTrain <= maxTimeToWait)) && production >= minProduction) {
         
             if ((timeBuyUniTrain <= maxTimeToWait) && (ns.hacknet.numHashes() >= universityHashCost)) {
                 ns.hacknet.spendHashes("Improve Studying");
